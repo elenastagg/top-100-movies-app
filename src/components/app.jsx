@@ -1,5 +1,10 @@
-import React from "react";
+import React from 'react';
+import Search from './search';
 
-const App = () => <div>Hello World</div>;
+class App extends React.Component {
+  render() {
+    return <Search>Search Bar</Search>;
+  }
+}
 
 export default App;
