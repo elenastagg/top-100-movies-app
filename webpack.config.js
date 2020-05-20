@@ -1,5 +1,8 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+
+dotenv.config();
 
 module.exports = {
   resolve: {
@@ -21,6 +24,6 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
     }),
-    new Dotenv(),
+    new webpack.EnvironmentPlugin(['API_KEY']),
   ],
 };
