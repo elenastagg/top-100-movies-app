@@ -8,19 +8,8 @@ class Search extends React.Component {
     this.state = {
       search: '',
       movies: [],
-      genres: [],
       errorMessage: '',
     };
-  }
-
-  componentDidMount() {
-    axios
-      .get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.API_KEY}`)
-      .then((response) => {
-        this.setState({
-          genres: response.data.genres,
-        });
-      });
   }
 
   handleChange = (event) => {
@@ -33,12 +22,10 @@ class Search extends React.Component {
     const { search } = this.state;
     const searchEnc = encodeURI(search);
     axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${searchEnc}&append_to_response=genre`,
-      )
+      .get(`${process.env.API_URL}/search?query=${searchEnc}`)
       .then((response) => {
         this.setState({
-          movies: response.data.results,
+          movies: response.data,
         });
       })
       .catch((error) => {
@@ -47,7 +34,7 @@ class Search extends React.Component {
   };
 
   render() {
-    const { genres, search, movies, errorMessage } = this.state;
+    const { search, movies, errorMessage } = this.state;
     return (
       <Fragment>
         <div className="search-bar">
@@ -66,7 +53,7 @@ class Search extends React.Component {
           <h1>Movies</h1>
           {errorMessage && <span>{errorMessage}</span>}
           {movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} genres={genres} />
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       </Fragment>

@@ -24,6 +24,6 @@ module.exports = {
       template: './src/index.html',
       filename: './index.html',
     }),
-    new webpack.EnvironmentPlugin(['API_KEY']),
+    new webpack.EnvironmentPlugin(['API_URL']),
   ],
 };
