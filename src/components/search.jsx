@@ -49,7 +49,7 @@ class Search extends React.Component {
             search
           </button>
         </div>
-        <div className="Movies">
+        <div className="movies">
           <h1>Movies</h1>
           {errorMessage && <span>{errorMessage}</span>}
           {movies.map((movie) => (
