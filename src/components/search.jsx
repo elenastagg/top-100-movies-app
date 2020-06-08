@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
 import MovieCard from './movie-card';
+import '../styles/button.scss';
+import '../styles/search.scss';
 
 class Search extends React.Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class Search extends React.Component {
     const { search } = this.state;
     const searchEnc = encodeURI(search);
     axios
-      .get(`${process.env.API_URL}/search?query=${searchEnc}`)
+      .get(`${process.env.API_URL}/movies/search?query=${searchEnc}`)
       .then((response) => {
         this.setState({
           movies: response.data,
@@ -37,20 +39,21 @@ class Search extends React.Component {
     const { search, movies, errorMessage } = this.state;
     return (
       <Fragment>
+        <h1>Movies</h1>
         <div className="search-bar">
           <input
+            className="button search"
             type="text"
             name="search"
             value={search}
             onChange={this.handleChange}
             placeholder="Search for a movie"
           />
-          <button type="button" onClick={this.handleSearch}>
+          <button type="button" className="button" onClick={this.handleSearch}>
             search
           </button>
         </div>
         <div className="movies">
-          <h1>Movies</h1>
           {errorMessage && <span>{errorMessage}</span>}
           {movies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />

@@ -1,10 +1,15 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const dotenv = require('dotenv');
 const webpack = require('webpack');
+const path = require('path');
 
 dotenv.config();
 
 module.exports = {
+  devServer: {
+    contentBase: path.join(__dirname),
+    historyApiFallback: true,
+  },
   resolve: {
     extensions: ['.js', '.jsx'],
   },

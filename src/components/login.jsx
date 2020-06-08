@@ -3,16 +3,14 @@ import '../styles/signup.scss';
 import '../styles/button.scss';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import TokenManager from '../utils/token-manager';
 
-class Signup extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      username: '',
-      email: '',
-      password: '',
+      email: 'elmo@gmail.com',
+      password: 'elmo123',
       errorMessage: '',
     };
   }
@@ -24,58 +22,31 @@ class Signup extends React.Component {
   };
 
   handleSubmit = (event) => {
-    const { firstName, lastName, username, email, password } = this.state;
+    const { email, password } = this.state;
     const { history } = this.props;
     event.preventDefault();
     axios
-      .post(`${process.env.API_URL}/users/signup`, {
-        first_name: firstName,
-        last_name: lastName,
-        username,
+      .post(`${process.env.API_URL}/users/login`, {
         email,
         password,
       })
-      .then(() => {
-        history.push('/login');
+      .then((response) => {
+        TokenManager.setToken(response.data.token);
+        history.push(`/profile/${TokenManager.getTokenPayLoad().id}`);
       })
       .catch((error) => {
-        this.setState({ errorMessage: error.response.data.message });
-        history.push('/');
+        this.setState({ errorMessage: error.message });
       });
   };
 
   render() {
-    const { firstName, lastName, username, email, password, errorMessage } = this.state;
+    const { email, password, errorMessage } = this.state;
     return (
       <Fragment>
         <h1>Top 100 Movies List</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form">
-            <h2 className="cta-box">Sign up to start now</h2>
-            <input
-              className="input-field"
-              name="firstName"
-              value={firstName}
-              type="text"
-              onChange={this.handleChange}
-              placeholder="First Name"
-            />
-            <input
-              className="input-field"
-              name="lastName"
-              value={lastName}
-              type="text"
-              onChange={this.handleChange}
-              placeholder="Last Name"
-            />
-            <input
-              className="input-field"
-              name="username"
-              value={username}
-              type="text"
-              onChange={this.handleChange}
-              placeholder="Username"
-            />
+            <h2 className="cta-box">Please login to confirm your details</h2>
             <input
               className="input-field"
               name="email"
@@ -93,7 +64,7 @@ class Signup extends React.Component {
               placeholder="Password"
             />
             <button type="submit" className="sign-up-button button">
-              Sign Up
+              Login
             </button>
             {errorMessage && <span>{errorMessage}</span>}
           </div>
@@ -103,10 +74,10 @@ class Signup extends React.Component {
   }
 }
 
-Signup.propTypes = {
+Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
 };
 
-export default Signup;
+export default Login;
