@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/signup.scss';
 import '../styles/button.scss';
 import PropTypes from 'prop-types';
@@ -9,8 +10,8 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'elmo@gmail.com',
-      password: 'elmo123',
+      email: 'michael@gmail.com',
+      password: 'ilovelamp',
       errorMessage: '',
     };
   }
@@ -46,7 +47,7 @@ class Login extends React.Component {
         <h1>Top 100 Movies List</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form">
-            <h2 className="cta-box">Please login to confirm your details</h2>
+            <h2 className="cta-box">Please login</h2>
             <input
               className="input-field"
               name="email"
@@ -66,6 +67,10 @@ class Login extends React.Component {
             <button type="submit" className="sign-up-button button">
               Login
             </button>
+            <div className="link">
+              Or
+              <Link to="/signup"> Signup</Link>
+            </div>
             {errorMessage && <span>{errorMessage}</span>}
           </div>
         </form>

@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/movie-card.scss';
 
-const MovieCard = ({ movie }) => (
+const MovieCard = ({ movie, handleAddMovie }) => (
   <div className="movie-container">
     <img
       className="image"
       alt="movie"
       src={`http://image.tmdb.org/t/p/w154/${movie.poster_path}`}
     />
-    <button type="button" className="button add">
+    <button onClick={() => handleAddMovie(movie.id)} type="button" className="button add">
       Add ★
     </button>
     <div className="movie-details">
@@ -31,6 +31,11 @@ MovieCard.propTypes = {
     overview: PropTypes.string,
     release_date: PropTypes.string,
   }).isRequired,
+  handleAddMovie: PropTypes.func,
+};
+
+MovieCard.defaultProps = {
+  handleAddMovie: () => {},
 };
 
 export default MovieCard;

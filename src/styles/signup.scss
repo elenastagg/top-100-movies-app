@@ -9,10 +9,15 @@
   font-family: 'Orbitron', sans-serif;
   color: white;
 }
-
 body {
   height: 100vh;
   background-image: radial-gradient(circle, #213d52, #264c62, #285469, #317282, #38808b, #4f9d9a);
+  margin: 0;
+}
+
+.background {
+  margin: 0;
+  height: 100%;
 }
 form {
   display: flex;
@@ -63,4 +68,11 @@ input {
   border: var(--blue3);
   margin-top: 0.5rem;
   box-shadow: inset 0px -8px 2px -5px var(--blue2);
+}
+.link {
+  text-align: center;
+  padding: 0.5rem;
+}
+a {
+  color: white;
 }

@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import TokenManager from '../utils/token-manager';
+import '../styles/button.scss';
+import MovieCard from './movie-card';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -9,6 +11,7 @@ class Profile extends React.Component {
     this.state = {
       firstName: '',
       lastName: '',
+      movies: [],
       errorMessage: '',
     };
   }
@@ -31,10 +34,28 @@ class Profile extends React.Component {
       .catch((error) => {
         this.setState({ errorMessage: error.response.data.message });
       });
+
+    axios
+      .get(`${process.env.API_URL}/favourites`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.setState({
+          movies: response.data,
+        });
+      })
+      .catch((error) => {
+        this.setState({ errorMessage: error.response.data.message });
+      });
   }
 
+  handleSearch = () => {
+    const { history } = this.props;
+    history.push('/search');
+  };
+
   render() {
-    const { firstName, lastName, errorMessage } = this.state;
+    const { firstName, lastName, errorMessage, movies } = this.state;
     return (
       <Fragment>
         <div className="profile">
@@ -42,6 +63,15 @@ class Profile extends React.Component {
             <div className="info-container">
               <div>{`${firstName} ${lastName} `}</div>
               {errorMessage && <div>{errorMessage}</div>}
+            </div>
+            <button className="button" type="button" onClick={this.handleSearch}>
+              Search for your favourite movies
+            </button>
+            <div className="movies-container">
+              {errorMessage && <div>{errorMessage}</div>}
+              {movies.map((movie) => (
+                <MovieCard key={movie.id} movie={movie} />
+              ))}
             </div>
           </div>
         </div>

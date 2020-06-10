@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import MovieCard from './movie-card';
+import TokenManager from '../utils/token-manager';
 import '../styles/button.scss';
 import '../styles/search.scss';
 
@@ -11,6 +13,7 @@ class Search extends React.Component {
       search: '',
       movies: [],
       errorMessage: '',
+      message: '',
     };
   }
 
@@ -35,8 +38,28 @@ class Search extends React.Component {
       });
   };
 
+  handleAddMovie = (id) => {
+    const token = TokenManager.getToken();
+    if (token !== null) {
+      axios
+        .post(
+          `${process.env.API_URL}/favourites`,
+          { movie_id: `${id}` },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        )
+        .then(() => {
+          this.setState({ message: 'Movie added to your top 100' });
+        })
+        .catch((error) => {
+          this.setState({ errorMessage: error.response.data.message });
+        });
+    }
+  };
+
   render() {
-    const { search, movies, errorMessage } = this.state;
+    const { search, movies, errorMessage, message } = this.state;
     return (
       <Fragment>
         <h1>Movies</h1>
@@ -55,13 +78,20 @@ class Search extends React.Component {
         </div>
         <div className="movies">
           {errorMessage && <span>{errorMessage}</span>}
+          {message && <span>{message}</span>}
           {movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
+            <MovieCard key={movie.id} movie={movie} handleAddMovie={this.handleAddMovie} />
           ))}
         </div>
       </Fragment>
     );
   }
 }
+
+Search.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default Search;

@@ -82,7 +82,7 @@ class Signup extends React.Component {
               value={email}
               type="email"
               onChange={this.handleChange}
-              placeholder="email"
+              placeholder="Email"
             />
             <input
               className="input-field password"
