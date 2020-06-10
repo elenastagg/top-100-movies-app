@@ -1,5 +1,6 @@
-import React from "react";
+import React from 'react';
+import Search from './search';
 
-const App = () => <div>Hello World</div>;
+const App = () => <Search />;
 
 export default App;

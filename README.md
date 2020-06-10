@@ -22,6 +22,10 @@ This is a website for users to login to their profile and rank their top 100 mov
 
 ### Installing
 
+npm install
+
+npm start
+
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
