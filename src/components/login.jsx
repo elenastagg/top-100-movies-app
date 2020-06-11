@@ -24,7 +24,7 @@ class Login extends React.Component {
 
   handleSubmit = (event) => {
     const { email, password } = this.state;
-    const { history } = this.props;
+    const { onLogin, history } = this.props;
     event.preventDefault();
     axios
       .post(`${process.env.API_URL}/users/login`, {
@@ -33,6 +33,7 @@ class Login extends React.Component {
       })
       .then((response) => {
         TokenManager.setToken(response.data.token);
+        onLogin();
         history.push(`/profile/${TokenManager.getTokenPayLoad().id}`);
       })
       .catch((error) => {
@@ -44,42 +45,45 @@ class Login extends React.Component {
     const { email, password, errorMessage } = this.state;
     return (
       <Fragment>
-        <h1>Top 100 Movies List</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form">
-            <h2 className="cta-box">Please login</h2>
-            <input
-              className="input-field"
-              name="email"
-              value={email}
-              type="email"
-              onChange={this.handleChange}
-              placeholder="email"
-            />
-            <input
-              className="input-field password"
-              name="password"
-              value={password}
-              type="password"
-              onChange={this.handleChange}
-              placeholder="Password"
-            />
-            <button type="submit" className="sign-up-button button">
-              Login
-            </button>
-            <div className="link">
-              Or
-              <Link to="/signup"> Signup</Link>
+        <div className="background">
+          <h1>Top 100 Movies List</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form">
+              <h2 className="cta-box">Please login</h2>
+              <input
+                className="input-field"
+                name="email"
+                value={email}
+                type="email"
+                onChange={this.handleChange}
+                placeholder="email"
+              />
+              <input
+                className="input-field password"
+                name="password"
+                value={password}
+                type="password"
+                onChange={this.handleChange}
+                placeholder="Password"
+              />
+              <button type="submit" className="sign-up-button button">
+                Login
+              </button>
+              <div className="link">
+                Or
+                <Link to="/signup"> Signup</Link>
+              </div>
+              {errorMessage && <span>{errorMessage}</span>}
             </div>
-            {errorMessage && <span>{errorMessage}</span>}
-          </div>
-        </form>
+          </form>
+        </div>
       </Fragment>
     );
   }
 }
 
 Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

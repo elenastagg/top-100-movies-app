@@ -3,14 +3,15 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import TokenManager from '../utils/token-manager';
 import '../styles/button.scss';
+import '../styles/profile.scss';
+import '../styles/movie-card.scss';
 import MovieCard from './movie-card';
 
 class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
+      username: '',
       movies: [],
       errorMessage: '',
     };
@@ -25,10 +26,9 @@ class Profile extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        const { firstName, lastName } = response.data;
+        const { username } = response.data;
         this.setState({
-          firstName,
-          lastName,
+          username,
         });
       })
       .catch((error) => {
@@ -55,24 +55,26 @@ class Profile extends React.Component {
   };
 
   render() {
-    const { firstName, lastName, errorMessage, movies } = this.state;
+    const { username, errorMessage, movies } = this.state;
     return (
       <Fragment>
         <div className="profile">
-          <div className="profile-info-container">
-            <div className="info-container">
-              <div>{`${firstName} ${lastName} `}</div>
-              {errorMessage && <div>{errorMessage}</div>}
+          <div className="info-container">
+            <h2>{`Welcome ${username}`}</h2>
+            <div>
+              <button className="button" type="button" onClick={this.handleSearch}>
+                Search for your favourite movies
+              </button>
             </div>
-            <button className="button" type="button" onClick={this.handleSearch}>
-              Search for your favourite movies
-            </button>
-            <div className="movies-container">
-              {errorMessage && <div>{errorMessage}</div>}
-              {movies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-              ))}
-            </div>
+            {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+            <h1 className="profile-header">Here are your Top {movies.length} Movies...</h1>
+            {errorMessage && <div>{errorMessage}</div>}
+          </div>
+          <div className="movies-container">
+            {errorMessage && <div>{errorMessage}</div>}
+            {movies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
           </div>
         </div>
       </Fragment>

@@ -52,7 +52,7 @@ class App extends React.Component {
   render() {
     return (
       <Fragment>
-        {this.isLoggedIn && <Navbar isLoggedIn={this.isLoggedIn()} onLogout={this.handleLogout} />}
+        <Navbar isLoggedIn={this.isLoggedIn()} onLogout={this.handleLogout} />
         <Switch>
           <Route
             exact

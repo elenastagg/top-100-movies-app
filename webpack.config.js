@@ -6,6 +6,9 @@ const path = require('path');
 dotenv.config();
 
 module.exports = {
+  output: {
+    publicPath: '/',
+  },
   devServer: {
     contentBase: path.join(__dirname),
     historyApiFallback: true,
@@ -29,6 +32,14 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
     ],
   },

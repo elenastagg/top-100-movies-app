@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/signup.scss';
 import '../styles/button.scss';
 import PropTypes from 'prop-types';
@@ -48,56 +49,62 @@ class Signup extends React.Component {
     const { firstName, lastName, username, email, password, errorMessage } = this.state;
     return (
       <Fragment>
-        <h1>Top 100 Movies List</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form">
-            <h2 className="cta-box">Sign up to start now</h2>
-            <input
-              className="input-field"
-              name="firstName"
-              value={firstName}
-              type="text"
-              onChange={this.handleChange}
-              placeholder="First Name"
-            />
-            <input
-              className="input-field"
-              name="lastName"
-              value={lastName}
-              type="text"
-              onChange={this.handleChange}
-              placeholder="Last Name"
-            />
-            <input
-              className="input-field"
-              name="username"
-              value={username}
-              type="text"
-              onChange={this.handleChange}
-              placeholder="Username"
-            />
-            <input
-              className="input-field"
-              name="email"
-              value={email}
-              type="email"
-              onChange={this.handleChange}
-              placeholder="Email"
-            />
-            <input
-              className="input-field password"
-              name="password"
-              value={password}
-              type="password"
-              onChange={this.handleChange}
-              placeholder="Password"
-            />
-            <button type="submit" className="sign-up-button button">
-              Sign Up
-            </button>
-            {errorMessage && <span>{errorMessage}</span>}
-          </div>
-        </form>
+        <div className="background">
+          <h1>Top 100 Movies List</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form">
+              <h2 className="cta-box">Sign up to start now</h2>
+              <input
+                className="input-field"
+                name="firstName"
+                value={firstName}
+                type="text"
+                onChange={this.handleChange}
+                placeholder="First Name"
+              />
+              <input
+                className="input-field"
+                name="lastName"
+                value={lastName}
+                type="text"
+                onChange={this.handleChange}
+                placeholder="Last Name"
+              />
+              <input
+                className="input-field"
+                name="username"
+                value={username}
+                type="text"
+                onChange={this.handleChange}
+                placeholder="Username"
+              />
+              <input
+                className="input-field"
+                name="email"
+                value={email}
+                type="email"
+                onChange={this.handleChange}
+                placeholder="Email"
+              />
+              <input
+                className="input-field password"
+                name="password"
+                value={password}
+                type="password"
+                onChange={this.handleChange}
+                placeholder="Password"
+              />
+              <button type="submit" className="sign-up-button button">
+                Sign Up
+              </button>
+              <div className="link">
+                Or
+                <Link to="/"> Log in</Link>
+              </div>
+              {errorMessage && <span>{errorMessage}</span>}
+            </div>
+          </form>
+        </div>
       </Fragment>
     );
   }
