@@ -36,11 +36,10 @@ class Signup extends React.Component {
         password,
       })
       .then(() => {
-        history.push('/login');
+        history.push('/');
       })
       .catch((error) => {
         this.setState({ errorMessage: error.response.data.message });
-        history.push('/');
       });
   };
 

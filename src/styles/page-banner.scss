@@ -1,0 +1,23 @@
+.page-banner {
+  grid-template-columns: 100%;
+  grid-template-rows: repeat(3, 33%);
+  background-image: radial-gradient(
+      circle,
+      RGB(0, 113, 141, 0.85),
+      RGB(40, 81, 103, 0.85),
+      RGB(33, 61, 82, 0.95),
+      RGB(24, 33, 65, 0.95)
+    ),
+    url('./images/movies.jpg');
+  padding: 2rem;
+}
+
+.header {
+  padding: 0;
+  text-align: left;
+  font-size: 2rem;
+}
+
+h2 {
+  font-weight: 600;
+}
