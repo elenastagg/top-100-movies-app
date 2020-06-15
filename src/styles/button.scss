@@ -11,3 +11,16 @@
   margin-top: 0.5rem;
   box-shadow: inset 0px -8px 2px -5px var(--blue2);
 }
+
+.button:hover {
+  background-color: var(--blue6);
+}
+
+.button:active {
+  background-color: var(--blue6);
+  transform: translateY(1.5px);
+}
+
+.message {
+  color: var(--blue4);
+}

@@ -5,6 +5,7 @@ import MovieCard from './movie-card';
 import TokenManager from '../utils/token-manager';
 import '../styles/button.scss';
 import '../styles/search.scss';
+import '../styles/page-banner.scss';
 
 class Search extends React.Component {
   constructor(props) {
@@ -62,23 +63,25 @@ class Search extends React.Component {
     const { search, movies, errorMessage, message } = this.state;
     return (
       <Fragment>
-        <h1>Movies</h1>
-        <div className="search-bar">
-          <input
-            className="button search"
-            type="text"
-            name="search"
-            value={search}
-            onChange={this.handleChange}
-            placeholder="Search for a movie"
-          />
-          <button type="button" className="button" onClick={this.handleSearch}>
-            search
-          </button>
+        <div className="page-banner">
+          <h1 className="header">Find your Favourite Movies</h1>
+          <div className="search-bar">
+            <input
+              className="button search-input"
+              type="text"
+              name="search"
+              value={search}
+              onChange={this.handleChange}
+              placeholder="Search for a movie"
+            />
+            <button type="button" className="button" onClick={this.handleSearch}>
+              search
+            </button>
+          </div>
         </div>
         <div className="movies">
-          {errorMessage && <span>{errorMessage}</span>}
-          {message && <span>{message}</span>}
+          {errorMessage && <span className="message">{errorMessage}</span>}
+          {message && <span className="message">{message}</span>}
           {movies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} handleAddMovie={this.handleAddMovie} />
           ))}

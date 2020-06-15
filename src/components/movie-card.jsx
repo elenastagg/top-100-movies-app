@@ -16,9 +16,11 @@ const MovieCard = ({ movie, handleAddMovie }) => (
         alt="movie"
         src={`http://image.tmdb.org/t/p/w92/${movie.poster_path}`}
       />
-      <button onClick={() => handleAddMovie(movie.id)} type="button" className="button add">
-        Add ★
-      </button>
+      {/profile/.test(window.location.href) ? null : (
+        <button onClick={() => handleAddMovie(movie.id)} type="button" className="button add">
+          Add ★
+        </button>
+      )}
       <div className="movie-details">
         <h2 className="move-title">{movie.original_title}</h2>
         <div className="release-date">{movie.release_date}</div>

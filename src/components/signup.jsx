@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/signup.scss';
+import '../styles/intro-page.scss';
 import '../styles/button.scss';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -94,7 +94,7 @@ class Signup extends React.Component {
                 onChange={this.handleChange}
                 placeholder="Password"
               />
-              <button type="submit" className="sign-up-button button">
+              <button type="submit" className="submit-button button">
                 Sign Up
               </button>
               <div className="link">

@@ -14,6 +14,18 @@
   box-shadow: none;
 }
 
+button.nav-item:hover {
+  background-color: var(--blue2);
+}
+
+button.nav-item:active {
+  transform: none;
+}
+
 a {
   text-decoration: none;
+}
+
+a:active {
+  color: var(--blue4);
 }

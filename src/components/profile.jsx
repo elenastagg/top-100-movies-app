@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import TokenManager from '../utils/token-manager';
 import '../styles/button.scss';
-import '../styles/profile.scss';
+import '../styles/page-banner.scss';
 import '../styles/movie-card.scss';
 import MovieCard from './movie-card';
 
@@ -20,7 +20,20 @@ class Profile extends React.Component {
   componentDidMount() {
     const { match } = this.props;
     const { id } = match.params;
+    this.getProfile(id);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { match } = this.props;
+    const { id } = match.params;
+    if (prevProps.match.params.id !== id) {
+      this.getProfile(id);
+    }
+  }
+
+  getProfile(id) {
     const token = TokenManager.getToken();
+
     axios
       .get(`${process.env.API_URL}/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -36,7 +49,7 @@ class Profile extends React.Component {
       });
 
     axios
-      .get(`${process.env.API_URL}/favourites`, {
+      .get(`${process.env.API_URL}/users/${id}/favourites`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -56,18 +69,28 @@ class Profile extends React.Component {
 
   render() {
     const { username, errorMessage, movies } = this.state;
+    const { match } = this.props;
+    const { id } = match.params;
     return (
       <Fragment>
         <div className="profile">
-          <div className="info-container">
-            <h2>{`Welcome ${username}`}</h2>
+          <div className="page-banner">
+            <h2>
+              {parseInt(id, 10) === TokenManager.getTokenPayLoad().id
+                ? `Welcome ${username}`
+                : `${username}'s profile`}
+            </h2>
             <div>
               <button className="button" type="button" onClick={this.handleSearch}>
                 Search for your favourite movies
               </button>
             </div>
             {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-            <h1 className="profile-header">Here are your Top {movies.length} Movies...</h1>
+            <h1 className="header">
+              {parseInt(id, 10) === TokenManager.getTokenPayLoad().id
+                ? `Here are your Top ${movies.length} Movies...`
+                : `${username}'s Top ${movies.length} Movies...`}
+            </h1>
             {errorMessage && <div>{errorMessage}</div>}
           </div>
           <div className="movies-container">
