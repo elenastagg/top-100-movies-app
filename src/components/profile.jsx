@@ -67,6 +67,27 @@ class Profile extends React.Component {
     history.push('/search');
   };
 
+  handleDeleteMovie = (id) => {
+    const token = TokenManager.getToken();
+    if (token !== null) {
+      axios
+        .delete(`${process.env.API_URL}/favourites/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then(() => {
+          const { movies } = this.state;
+          const isNotDeletedMovie = (movie) => movie.id !== id;
+          const notDeletedMovies = movies.filter(isNotDeletedMovie);
+          this.setState({
+            movies: notDeletedMovies,
+          });
+        })
+        .catch((error) => {
+          this.setState({ errorMessage: error.response.data.message });
+        });
+    }
+  };
+
   render() {
     const { username, errorMessage, movies } = this.state;
     const { match } = this.props;
@@ -96,7 +117,7 @@ class Profile extends React.Component {
           <div className="movies-container">
             {errorMessage && <div>{errorMessage}</div>}
             {movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} />
+              <MovieCard key={movie.id} movie={movie} onDelete={this.handleDeleteMovie} id={id} />
             ))}
           </div>
         </div>

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../styles/movie-card.scss';
+import TokenManager from '../utils/token-manager';
 
-const MovieCard = ({ movie, handleAddMovie }) => (
+const MovieCard = ({ movie, handleAddMovie, onDelete, id }) => (
   <div
     className="container-box"
     style={{
@@ -16,7 +17,11 @@ const MovieCard = ({ movie, handleAddMovie }) => (
         alt="movie"
         src={`http://image.tmdb.org/t/p/w92/${movie.poster_path}`}
       />
-      {/profile/.test(window.location.href) ? null : (
+      {parseInt(id, 10) === TokenManager.getTokenPayLoad().id ? (
+        <button onClick={() => onDelete(movie.id)} type="button" className="button add">
+          Delete
+        </button>
+      ) : (
         <button onClick={() => handleAddMovie(movie.id)} type="button" className="button add">
           Add ★
         </button>
@@ -41,11 +46,14 @@ MovieCard.propTypes = {
     overview: PropTypes.string,
     release_date: PropTypes.string,
   }).isRequired,
+  id: PropTypes.string.isRequired,
   handleAddMovie: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 MovieCard.defaultProps = {
   handleAddMovie: () => {},
+  onDelete: () => {},
 };
 
 export default MovieCard;
