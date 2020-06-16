@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap&family=Titillium+Web:wght@200;300;400;600&display=swap');
+
+:root {
+  --blue1: #182141;
+  --blue2: #213d52;
+  --blue3: #285167;
+  --blue4: #4f9d9a;
+  font-size: 0.85rem;
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+}
+
+body {
+  height: 100vh;
+  background-image: radial-gradient(circle, #213d52, #264c62, #285469, #317282, #38808b, #4f9d9a);
+}
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  border: 1px solid var(--blue4);
+  border-radius: 0.3rem;
+  padding: 1rem;
+  width: 22%;
+}
+h1 {
+  text-align: center;
+  padding: 3rem;
+  font-size: 3.5rem;
+}
+h2 {
+  font-weight: 400;
+}
+.cta-box {
+  color: white;
+  text-align: center;
+}
+.input-field {
+  border: 1px solid var(--blue4);
+  color: var(--blue4);
+  border-radius: 0.3rem;
+  margin-top: 0.5rem;
+  padding: 1.1rem;
+  width: 100%;
+}
+input {
+  font-weight: 400;
+  font-family: 'Orbitron', sans-serif;
+  border-style: none;
+  background-color: none;
+  outline: none;
+}
+.sign-up-button {
+  background: var(--blue4);
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 1.1rem;
+  width: 100%;
+  border-radius: 0.3rem;
+  border: var(--blue3);
+  margin-top: 0.5rem;
+  box-shadow: inset 0px -8px 2px -5px var(--blue2);
+}

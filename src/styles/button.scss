@@ -1,0 +1,13 @@
+.button {
+  background: var(--blue4);
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 1.1rem;
+  border-radius: 0.3rem;
+  border: var(--blue3);
+  outline: none;
+  margin-top: 0.5rem;
+  box-shadow: inset 0px -8px 2px -5px var(--blue2);
+}
