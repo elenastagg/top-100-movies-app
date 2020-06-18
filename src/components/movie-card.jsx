@@ -17,13 +17,19 @@ const MovieCard = ({ movie, handleAddMovie, onDelete, id }) => (
         alt="movie"
         src={`http://image.tmdb.org/t/p/w92/${movie.poster_path}`}
       />
+
       {parseInt(id, 10) === TokenManager.getTokenPayLoad().id ? (
         <button onClick={() => onDelete(movie.id)} type="button" className="button add">
           Delete
         </button>
       ) : (
-        <button onClick={() => handleAddMovie(movie.id)} type="button" className="button add">
-          Add ★
+        <button
+          id="add"
+          onClick={() => handleAddMovie(movie.id)}
+          type="button"
+          className="button add"
+        >
+          {movie.isAdded ? `Added ✓` : `Add ★`}
         </button>
       )}
       <div className="movie-details">
@@ -42,16 +48,19 @@ MovieCard.propTypes = {
     id: PropTypes.number,
     original_title: PropTypes.string,
     poster_path: PropTypes.string,
+    backdrop_path: PropTypes.string,
+    isAdded: PropTypes.bool,
     genres: PropTypes.array,
     overview: PropTypes.string,
     release_date: PropTypes.string,
   }).isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   handleAddMovie: PropTypes.func,
   onDelete: PropTypes.func,
 };
 
 MovieCard.defaultProps = {
+  id: '',
   handleAddMovie: () => {},
   onDelete: () => {},
 };

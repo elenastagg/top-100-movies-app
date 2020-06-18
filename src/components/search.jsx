@@ -14,7 +14,6 @@ class Search extends React.Component {
       search: '',
       movies: [],
       errorMessage: '',
-      message: '',
     };
   }
 
@@ -26,9 +25,12 @@ class Search extends React.Component {
 
   handleSearch = () => {
     const { search } = this.state;
+    const token = TokenManager.getToken();
     const searchEnc = encodeURI(search);
     axios
-      .get(`${process.env.API_URL}/movies/search?query=${searchEnc}`)
+      .get(`${process.env.API_URL}/movies/search?query=${searchEnc}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((response) => {
         this.setState({
           movies: response.data,
@@ -40,18 +42,31 @@ class Search extends React.Component {
   };
 
   handleAddMovie = (id) => {
+    const { movies } = this.state;
     const token = TokenManager.getToken();
     if (token !== null) {
       axios
         .post(
           `${process.env.API_URL}/favourites`,
-          { movie_id: `${id}` },
+          {
+            movie_id: `${id}`,
+          },
           {
             headers: { Authorization: `Bearer ${token}` },
           },
         )
         .then(() => {
-          this.setState({ message: 'Movie added to your top 100' });
+          this.setState({
+            movies: movies.map((movie) => {
+              if (movie.id === id) {
+                return {
+                  ...movie,
+                  isAdded: true,
+                };
+              }
+              return movie;
+            }),
+          });
         })
         .catch((error) => {
           this.setState({ errorMessage: error.response.data.message });
@@ -81,9 +96,13 @@ class Search extends React.Component {
         </div>
         <div className="movies">
           {errorMessage && <span className="message">{errorMessage}</span>}
-          {message && <span className="message">{message}</span>}
           {movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} handleAddMovie={this.handleAddMovie} />
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              handleAddMovie={this.handleAddMovie}
+              message={message}
+            />
           ))}
         </div>
       </Fragment>

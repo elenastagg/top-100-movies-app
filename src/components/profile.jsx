@@ -88,6 +88,39 @@ class Profile extends React.Component {
     }
   };
 
+  handleAddMovie = (id) => {
+    const { movies } = this.state;
+    const token = TokenManager.getToken();
+    if (token !== null) {
+      axios
+        .post(
+          `${process.env.API_URL}/favourites`,
+          {
+            movie_id: `${id}`,
+          },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        )
+        .then(() => {
+          this.setState({
+            movies: movies.map((movie) => {
+              if (movie.id === id) {
+                return {
+                  ...movie,
+                  isAdded: true,
+                };
+              }
+              return movie;
+            }),
+          });
+        })
+        .catch((error) => {
+          this.setState({ errorMessage: error.response.data.message });
+        });
+    }
+  };
+
   render() {
     const { username, errorMessage, movies } = this.state;
     const { match } = this.props;
@@ -117,7 +150,13 @@ class Profile extends React.Component {
           <div className="movies-container">
             {errorMessage && <div>{errorMessage}</div>}
             {movies.map((movie) => (
-              <MovieCard key={movie.id} movie={movie} onDelete={this.handleDeleteMovie} id={id} />
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                onDelete={this.handleDeleteMovie}
+                handleAddMovie={this.handleAddMovie}
+                id={id}
+              />
             ))}
           </div>
         </div>
