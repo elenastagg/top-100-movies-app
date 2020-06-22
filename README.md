@@ -18,6 +18,7 @@ This is a website for users to login to their profile and rank their top 100 mov
 - They will be able to star a movie on someone elses list to add it to their 'watchlist'
 - They will be able to add 'friends'
 - Movies in the list will have a count that shows how many other friends include this movie in their list with a link to view the friends list
+- Add movie recommendations based on favourites list: https://docs.aws.amazon.com/personalize/latest/dg/getting-started-console.html
 
 ## Getting Started
 
