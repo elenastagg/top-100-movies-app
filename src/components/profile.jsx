@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import TokenManager from '../utils/token-manager';
@@ -62,30 +63,23 @@ class Profile extends React.Component {
       });
   }
 
-  handleSearch = () => {
-    const { history } = this.props;
-    history.push('/search');
-  };
-
   handleDeleteMovie = (id) => {
     const token = TokenManager.getToken();
-    if (token !== null) {
-      axios
-        .delete(`${process.env.API_URL}/favourites/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then(() => {
-          const { movies } = this.state;
-          const isNotDeletedMovie = (movie) => movie.id !== id;
-          const notDeletedMovies = movies.filter(isNotDeletedMovie);
-          this.setState({
-            movies: notDeletedMovies,
-          });
-        })
-        .catch((error) => {
-          this.setState({ errorMessage: error.response.data.message });
+    axios
+      .delete(`${process.env.API_URL}/favourites/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(() => {
+        const { movies } = this.state;
+        const isNotDeletedMovie = (movie) => movie.id !== id;
+        const notDeletedMovies = movies.filter(isNotDeletedMovie);
+        this.setState({
+          movies: notDeletedMovies,
         });
-    }
+      })
+      .catch((error) => {
+        this.setState({ errorMessage: error.response.data.message });
+      });
   };
 
   handleAddMovie = (id) => {
@@ -135,8 +129,8 @@ class Profile extends React.Component {
                 : `${username}'s profile`}
             </h2>
             <div>
-              <button className="button" type="button" onClick={this.handleSearch}>
-                Search for your favourite movies
+              <button className="button" type="button">
+                <Link to="/search"> Search for your favourite movies</Link>
               </button>
             </div>
             {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
@@ -166,9 +160,6 @@ class Profile extends React.Component {
 }
 
 Profile.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string.isRequired,
