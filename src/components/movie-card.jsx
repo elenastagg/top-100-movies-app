@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../styles/movie-card.scss';
 import TokenManager from '../utils/token-manager';
 
-const MovieCard = ({ movie, handleAddMovie, onDelete, id }) => (
+const MovieCard = ({ movie, handleAddMovie, onDelete, id, errorMessage }) => (
   <div
     className="container-box"
     style={{
@@ -32,6 +32,7 @@ const MovieCard = ({ movie, handleAddMovie, onDelete, id }) => (
           {movie.isAdded ? `Added ✓` : `Add ★`}
         </button>
       )}
+      {errorMessage && <span className="message white">{errorMessage}</span>}
       <div className="movie-details">
         <h2 className="move-title">{movie.original_title}</h2>
         <div className="release-date">{movie.release_date}</div>

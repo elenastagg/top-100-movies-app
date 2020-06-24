@@ -69,7 +69,7 @@ class Search extends React.Component {
           });
         })
         .catch((error) => {
-          this.setState({ errorMessage: error.response.data.message });
+          this.setState({ errorMessage: error.response.data });
         });
     }
   };
@@ -95,13 +95,13 @@ class Search extends React.Component {
           </div>
         </div>
         <div className="movies">
-          {errorMessage && <span className="message">{errorMessage}</span>}
           {movies.map((movie) => (
             <MovieCard
               key={movie.id}
               movie={movie}
               handleAddMovie={this.handleAddMovie}
               message={message}
+              errorMessage={errorMessage}
             />
           ))}
         </div>
