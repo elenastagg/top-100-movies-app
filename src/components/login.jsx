@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import '../styles/signup.scss';
+import { Link } from 'react-router-dom';
+import '../styles/intro-page.scss';
 import '../styles/button.scss';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -9,8 +10,8 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'elmo@gmail.com',
-      password: 'elmo123',
+      email: '',
+      password: '',
       errorMessage: '',
     };
   }
@@ -23,7 +24,7 @@ class Login extends React.Component {
 
   handleSubmit = (event) => {
     const { email, password } = this.state;
-    const { history } = this.props;
+    const { onLogin, history } = this.props;
     event.preventDefault();
     axios
       .post(`${process.env.API_URL}/users/login`, {
@@ -32,6 +33,7 @@ class Login extends React.Component {
       })
       .then((response) => {
         TokenManager.setToken(response.data.token);
+        onLogin();
         history.push(`/profile/${TokenManager.getTokenPayLoad().id}`);
       })
       .catch((error) => {
@@ -43,38 +45,45 @@ class Login extends React.Component {
     const { email, password, errorMessage } = this.state;
     return (
       <Fragment>
-        <h1>Top 100 Movies List</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form">
-            <h2 className="cta-box">Please login to confirm your details</h2>
-            <input
-              className="input-field"
-              name="email"
-              value={email}
-              type="email"
-              onChange={this.handleChange}
-              placeholder="email"
-            />
-            <input
-              className="input-field password"
-              name="password"
-              value={password}
-              type="password"
-              onChange={this.handleChange}
-              placeholder="Password"
-            />
-            <button type="submit" className="sign-up-button button">
-              Login
-            </button>
-            {errorMessage && <span>{errorMessage}</span>}
-          </div>
-        </form>
+        <div className="background">
+          <h1>Top 100 Movies List</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form">
+              <h2 className="cta-box">Please login</h2>
+              <input
+                className="input-field"
+                name="email"
+                value={email}
+                type="email"
+                onChange={this.handleChange}
+                placeholder="email"
+              />
+              <input
+                className="input-field password"
+                name="password"
+                value={password}
+                type="password"
+                onChange={this.handleChange}
+                placeholder="Password"
+              />
+              <button type="submit" className="submit-button button">
+                Login
+              </button>
+              <div className="link">
+                Or
+                <Link to="/signup"> Signup</Link>
+              </div>
+              {errorMessage && <span>{errorMessage}</span>}
+            </div>
+          </form>
+        </div>
       </Fragment>
     );
   }
 }
 
 Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

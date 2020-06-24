@@ -1,0 +1,31 @@
+.navbar {
+  background-color: var(--blue2);
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-item {
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  margin: 1rem;
+  background-color: var(--blue2);
+  box-shadow: none;
+}
+
+button.nav-item:hover {
+  background-color: var(--blue2);
+}
+
+button.nav-item:active {
+  transform: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:active {
+  color: var(--blue4);
+}

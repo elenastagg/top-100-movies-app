@@ -6,6 +6,7 @@ import Search from './search';
 import Signup from './signup';
 import Login from './login';
 import Profile from './profile';
+import Navbar from './navbar';
 
 class App extends React.Component {
   constructor(props) {
@@ -38,7 +39,6 @@ class App extends React.Component {
 
   isLoggedIn = () => {
     const { user } = this.state;
-
     return Boolean(user) && TokenManager.isTokenValid();
   };
 
@@ -52,6 +52,7 @@ class App extends React.Component {
   render() {
     return (
       <Fragment>
+        <Navbar isLoggedIn={this.isLoggedIn()} onLogout={this.handleLogout} />
         <Switch>
           <Route
             exact
