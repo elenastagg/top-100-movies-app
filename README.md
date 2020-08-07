@@ -12,7 +12,7 @@ This is a website for users to login to their profile and rank their top 100 mov
 
 # Possible future features
 
-- The user can search for a friend with their eamil address 
+- The user can search for a friend with their email address 
 - The user can rank a movie / 100.
 - They can drag and drop movies in the list
 - They will be able to star a movie on someone elses list to add it to their 'watchlist'
