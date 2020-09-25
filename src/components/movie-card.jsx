@@ -7,7 +7,7 @@ const MovieCard = ({ movie, handleAddMovie, onDelete, id, errorMessage }) => (
   <div
     className="movie-card-container"
     style={{
-      backgroundImage: `url('http://image.tmdb.org/t/p/original/${movie.backdrop_path}')`,
+      backgroundImage: `url('https://image.tmdb.org/t/p/original/${movie.backdrop_path}')`,
       backgroundSize: 'cover',
     }}
   >
@@ -15,7 +15,7 @@ const MovieCard = ({ movie, handleAddMovie, onDelete, id, errorMessage }) => (
       <img
         className="image"
         alt="movie"
-        src={`http://image.tmdb.org/t/p/w92/${movie.poster_path}`}
+        src={`https://image.tmdb.org/t/p/w92/${movie.poster_path}`}
       />
 
       {parseInt(id, 10) === TokenManager.getTokenPayLoad().id ? (

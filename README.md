@@ -8,11 +8,11 @@ This is a website for users to login to their profile and rank their top 100 mov
 - The user will be able to search for a movie in the database
 - The user can add a movie to their favourites list
 - They will be able to see other users' list (only with URL)
-- If viewing another profile they can added a movie to their own favourites list 
+- If viewing another profile they can added a movie to their own favourites list
 
 # Possible future features
 
-- The user can search for a friend with their email address 
+- The user can search for a friend with their email address
 - The user can rank a movie / 100.
 - They can drag and drop movies in the list
 - They will be able to star a movie on someone elses list to add it to their 'watchlist'
