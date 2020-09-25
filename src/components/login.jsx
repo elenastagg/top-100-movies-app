@@ -45,11 +45,11 @@ class Login extends React.Component {
     const { email, password, errorMessage } = this.state;
     return (
       <Fragment>
-        <div className="background">
-          <h1>Top 100 Movies List</h1>
+        <main className="main-logged-out">
+          <h1 className="title">Top 100 Movies List</h1>
           <form onSubmit={this.handleSubmit}>
             <div className="form">
-              <h2 className="cta-box">Please login</h2>
+              <h2 className="secondary-title">Please login</h2>
               <input
                 className="input-field"
                 name="email"
@@ -76,7 +76,7 @@ class Login extends React.Component {
               {errorMessage && <span>{errorMessage}</span>}
             </div>
           </form>
-        </div>
+        </main>
       </Fragment>
     );
   }

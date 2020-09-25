@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import TokenManager from '../utils/token-manager';
-import '../styles/button.scss';
-import '../styles/page-banner.scss';
+import '../styles/main-logged-in.scss';
 import '../styles/movie-card.scss';
 import MovieCard from './movie-card';
 
@@ -121,20 +120,22 @@ class Profile extends React.Component {
     const { id } = match.params;
     return (
       <Fragment>
-        <div className="profile">
-          <div className="page-banner">
-            <h2>
-              {parseInt(id, 10) === TokenManager.getTokenPayLoad().id
-                ? `Welcome ${username}`
-                : `${username}'s profile`}
-            </h2>
+        <main className="main-logged-in">
+          <div className="header">
+            <Link to={`/profile/${TokenManager.getTokenPayLoad().id}`}>
+              <h2>
+                {parseInt(id, 10) === TokenManager.getTokenPayLoad().id
+                  ? `Welcome ${username}`
+                  : `${username}'s profile`}
+              </h2>
+            </Link>
             <div>
-              <button className="button" type="button">
+              <button className="button search" type="button">
                 <Link to="/search"> Search for your favourite movies</Link>
               </button>
             </div>
             {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-            <h1 className="header">
+            <h1 className="title">
               {parseInt(id, 10) === TokenManager.getTokenPayLoad().id
                 ? `Here are your Top ${movies.length} Movies...`
                 : `${username}'s Top ${movies.length} Movies...`}
@@ -153,7 +154,7 @@ class Profile extends React.Component {
               />
             ))}
           </div>
-        </div>
+        </main>
       </Fragment>
     );
   }

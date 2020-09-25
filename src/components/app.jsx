@@ -6,13 +6,16 @@ import Search from './search';
 import Signup from './signup';
 import Login from './login';
 import Profile from './profile';
-import Navbar from './navbar';
+import Navbar from './navigation/navbar';
+import MobileNav from './navigation/mobile-nav';
+import Backdrop from './navigation/backdrop';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: TokenManager.isTokenValid() ? TokenManager.getTokenPayLoad() : null,
+      mobileNavOpen: false,
     };
   }
 
@@ -49,10 +52,40 @@ class App extends React.Component {
     }
   };
 
+  handleMobileNavToggle = () => {
+    this.setState((prevState) => {
+      return { mobileNavOpen: !prevState.mobileNavOpen };
+    });
+  };
+
+  handleMobileNavClose = () => {
+    this.setState({ mobileNavOpen: false });
+  };
+
   render() {
+    const { mobileNavOpen } = this.state;
+
+    let mobileNav;
+    let backdrop;
+    if (mobileNavOpen) {
+      mobileNav = (
+        <MobileNav
+          onCloseNav={this.handleMobileNavClose}
+          isLoggedIn={this.isLoggedIn()}
+          onLogout={this.handleLogout}
+        />
+      );
+      backdrop = <Backdrop onCloseNav={this.handleMobileNavClose} />;
+    }
     return (
       <Fragment>
-        <Navbar isLoggedIn={this.isLoggedIn()} onLogout={this.handleLogout} />
+        <Navbar
+          isLoggedIn={this.isLoggedIn()}
+          onLogout={this.handleLogout}
+          onToggleMobileNav={this.handleMobileNavToggle}
+        />
+        {mobileNav}
+        {backdrop}
         <Switch>
           <Route
             exact
