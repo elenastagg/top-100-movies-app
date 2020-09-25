@@ -42,6 +42,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@loadable/component": "^5.13.2",
     "axios": "^0.19.2",
     "jwt-decode": "^2.2.0",
     "prop-types": "^15.7.2",

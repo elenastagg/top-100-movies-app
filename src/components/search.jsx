@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
+import loadable from '@loadable/component';
 import PropTypes from 'prop-types';
-import MovieCard from './movie-card';
 import TokenManager from '../utils/token-manager';
 import '../styles/button.scss';
 import '../styles/search.scss';
 import '../styles/main-logged-in.scss';
+
+const MovieCard = loadable(() => import('./movie-card'));
 
 class Search extends React.Component {
   constructor(props) {

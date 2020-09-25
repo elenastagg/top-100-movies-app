@@ -1,14 +1,16 @@
 import React, { Fragment } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import loadable from '@loadable/component';
 import TokenManager from '../utils/token-manager';
-import Search from './search';
 import Signup from './signup';
 import Login from './login';
 import Profile from './profile';
 import Navbar from './navigation/navbar';
 import MobileNav from './navigation/mobile-nav';
 import Backdrop from './navigation/backdrop';
+
+const Search = loadable(() => import('./search'));
 
 class App extends React.Component {
   constructor(props) {
