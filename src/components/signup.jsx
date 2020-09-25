@@ -64,49 +64,73 @@ class Signup extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <div className="form">
               <h2 className="secondary-title">Sign up to start now</h2>
+              <label className="form-label" htmlFor="firstName">
+                First Name
+              </label>
               <input
                 className="input-field"
                 name="firstName"
+                id="firstName"
                 value={firstName}
                 type="text"
                 onChange={this.handleChange}
                 placeholder="First Name"
               />
+              <label className="form-label" htmlFor="lastName">
+                Last Name
+              </label>
               <input
                 className="input-field"
+                id="lastName"
                 name="lastName"
                 value={lastName}
                 type="text"
                 onChange={this.handleChange}
                 placeholder="Last Name"
               />
+              <label className="form-label" htmlFor="username">
+                Username
+              </label>
               <input
                 className="input-field"
                 name="username"
+                id="username"
                 value={username}
                 type="text"
                 onChange={this.handleChange}
                 placeholder="Username"
               />
+              <label className="form-label" htmlFor="email">
+                Email
+              </label>
               <input
                 className="input-field"
                 name="email"
+                id="email"
                 value={email}
                 type="email"
                 onChange={this.handleChange}
                 placeholder="Email"
               />
+              <label className="form-label" htmlFor="password">
+                Password
+              </label>
               <input
                 className="input-field password"
                 name="password"
+                id="password"
                 value={password}
                 type="password"
                 onChange={this.handleChange}
                 placeholder="Password"
               />
+              <label className="form-label" htmlFor="confirmPassword">
+                Confirm Password
+              </label>
               <input
                 className="input-field password"
                 name="confirmPassword"
+                id="confirmPassword"
                 value={confirmPassword}
                 type="password"
                 onChange={this.handleChange}

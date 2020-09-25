@@ -82,15 +82,24 @@ class Search extends React.Component {
           <div className="header">
             <h1 className="title">Find your Favourite Movies</h1>
             <div className="search-bar">
+              <label className="form-label" htmlFor="search">
+                Search
+              </label>
               <input
                 className="button search-input"
+                id="search"
                 type="text"
                 name="search"
                 value={search}
                 onChange={this.handleChange}
                 placeholder="Search for a movie"
               />
-              <button type="button" className="button search" onClick={this.handleSearch}>
+              <button
+                aria-label="search button"
+                type="button"
+                className="button search"
+                onClick={this.handleSearch}
+              >
                 <span className="search-button-text-1">
                   <i className="fas fa-angle-double-right" />
                 </span>

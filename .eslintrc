@@ -13,6 +13,16 @@
   "rules": {
     "react/jsx-props-no-spreading": "off",
     "no-underscore-dangle": ["error", { "allow": ["_id"] }],
-    "react/jsx-fragments": ["error", "element"]
+    "react/jsx-fragments": ["error", "element"],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "labelComponents": [],
+        "labelAttributes": [],
+        "controlComponents": [],
+        "assert": "either",
+        "depth": 25
+      }
+    ]
   }
 }
