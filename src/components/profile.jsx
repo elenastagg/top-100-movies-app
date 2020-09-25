@@ -122,13 +122,11 @@ class Profile extends React.Component {
       <Fragment>
         <main className="main-logged-in">
           <div className="header">
-            <Link to={`/profile/${TokenManager.getTokenPayLoad().id}`}>
-              <h2>
-                {parseInt(id, 10) === TokenManager.getTokenPayLoad().id
-                  ? `Welcome ${username}`
-                  : `${username}'s profile`}
-              </h2>
-            </Link>
+            <h2>
+              {parseInt(id, 10) === TokenManager.getTokenPayLoad().id
+                ? `Welcome ${username}`
+                : `${username}'s profile`}
+            </h2>
             <div>
               <button className="button search" type="button">
                 <Link to="/search"> Search for your favourite movies</Link>

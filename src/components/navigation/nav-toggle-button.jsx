@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import '../../styles/navigation/nav-toggle-button.scss';
 
 const navToggleButton = ({ click }) => (
-  <button type="button" className="toggle-button" onClick={click}>
+  <button
+    aria-label="navigation drop-down button"
+    type="button"
+    className="toggle-button"
+    onClick={click}
+  >
     <div className="toggle-button-line" />
     <div className="toggle-button-line" />
     <div className="toggle-button-line" />
