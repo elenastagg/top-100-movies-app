@@ -1,0 +1,24 @@
+.mobile-nav {
+  background: var(--blue3);
+  width: 100%;
+  display: flex;
+  z-index: 2;
+  justify-content: center;
+  position: relative;
+}
+
+.mobile-nav-items {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.mobile-nav-item {
+  margin: 1rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+}

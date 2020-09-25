@@ -5,7 +5,7 @@ import MovieCard from './movie-card';
 import TokenManager from '../utils/token-manager';
 import '../styles/button.scss';
 import '../styles/search.scss';
-import '../styles/page-banner.scss';
+import '../styles/main-logged-in.scss';
 
 class Search extends React.Component {
   constructor(props) {
@@ -78,33 +78,38 @@ class Search extends React.Component {
     const { search, movies, errorMessage, message } = this.state;
     return (
       <Fragment>
-        <div className="page-banner">
-          <h1 className="header">Find your Favourite Movies</h1>
-          <div className="search-bar">
-            <input
-              className="button search-input"
-              type="text"
-              name="search"
-              value={search}
-              onChange={this.handleChange}
-              placeholder="Search for a movie"
-            />
-            <button type="button" className="button" onClick={this.handleSearch}>
-              search
-            </button>
+        <main className="main-logged-in">
+          <div className="header">
+            <h1 className="title">Find your Favourite Movies</h1>
+            <div className="search-bar">
+              <input
+                className="button search-input"
+                type="text"
+                name="search"
+                value={search}
+                onChange={this.handleChange}
+                placeholder="Search for a movie"
+              />
+              <button type="button" className="button search" onClick={this.handleSearch}>
+                <span className="search-button-text-1">
+                  <i className="fas fa-angle-double-right" />
+                </span>
+                <span className="search-button-text-2">search</span>
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="movies">
-          {movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              handleAddMovie={this.handleAddMovie}
-              message={message}
-              errorMessage={errorMessage}
-            />
-          ))}
-        </div>
+          <div className="movies">
+            {movies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                handleAddMovie={this.handleAddMovie}
+                message={message}
+                errorMessage={errorMessage}
+              />
+            ))}
+          </div>
+        </main>
       </Fragment>
     );
   }

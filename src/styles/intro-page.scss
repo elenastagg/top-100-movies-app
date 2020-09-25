@@ -7,16 +7,22 @@
   --blue4: #4f9d9a;
   --blue5: #00718d;
   --blue6: #438381;
-  font-size: 0.85rem;
-  font-family: 'Orbitron', sans-serif;
-  color: white;
 }
+
+html {
+  height: 100%;
+}
+
 body {
-  height: 100vh;
+  font-family: 'Orbitron', sans-serif;
+  color: #ffffff;
+  height: 100%;
+  width: 100%;
   margin: 0;
 }
 
-.background {
+.main-logged-out {
+  padding: 2.5rem;
   background-image: radial-gradient(
       circle,
       RGB(0, 113, 141, 0.85),
@@ -25,42 +31,37 @@ body {
       RGB(24, 33, 65, 0.95)
     ),
     url('./images/movies.jpg');
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  height: 100vh;
+  background-repeat: repeat;
 }
-form {
+.title {
+  text-align: center;
+  font-size: 2rem;
+}
+.secondary-title {
+  font-size: 1.25rem;
+  text-align: center;
+}
+.form {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   margin: auto;
   border: 2px solid var(--blue4);
   border-radius: 0.3rem;
   padding: 1rem;
-  width: 22%;
 }
-h1 {
-  text-align: center;
-  padding: 4.5rem;
-  font-size: 3.5rem;
-}
-h2 {
-  font-weight: 400;
-}
-.cta-box {
-  color: white;
-  text-align: center;
-}
+
 .input-field {
   border: 1px solid var(--blue4);
   color: var(--blue4);
   border-radius: 0.3rem;
   margin-top: 0.5rem;
-  padding: 1.1rem;
-  width: 100%;
+  padding: 0.75rem;
+  width: 90%;
 }
+
 input {
   font-weight: 400;
   font-family: 'Orbitron', sans-serif;
@@ -68,23 +69,37 @@ input {
   background-color: none;
   outline: none;
 }
-.submit-button {
-  background: var(--blue4);
-  color: white;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-  padding: 1.1rem;
-  width: 100%;
-  border-radius: 0.3rem;
-  border: var(--blue3);
-  margin-top: 0.5rem;
-  box-shadow: inset 0px -8px 2px -5px var(--blue2);
-}
+
 .link {
-  text-align: center;
-  padding: 0.5rem;
+  font-size: 0.75rem;
+  padding: 0.75rem;
 }
 a {
-  color: white;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.submit-button {
+  width: 100%;
+}
+
+@media only screen and (min-width: 1440px) {
+  .form {
+    width: 25%;
+    margin: auto;
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .input-field {
+    width: 94%;
+  }
+
+  .link {
+    font-size: 1rem;
+  }
 }

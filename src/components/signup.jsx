@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/intro-page.scss';
-import '../styles/button.scss';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -14,6 +12,7 @@ class Signup extends React.Component {
       username: '',
       email: '',
       password: '',
+      confirmPassword: '',
       errorMessage: '',
     };
   }
@@ -25,34 +24,46 @@ class Signup extends React.Component {
   };
 
   handleSubmit = (event) => {
-    const { firstName, lastName, username, email, password } = this.state;
+    const { firstName, lastName, username, email, password, confirmPassword } = this.state;
     const { history } = this.props;
     event.preventDefault();
-    axios
-      .post(`${process.env.API_URL}/users/signup`, {
-        first_name: firstName,
-        last_name: lastName,
-        username,
-        email,
-        password,
-      })
-      .then(() => {
-        history.push('/');
-      })
-      .catch((error) => {
-        this.setState({ errorMessage: error.response.data.message });
-      });
+    if (password !== confirmPassword) {
+      this.setState({ errorMessage: 'passwords must match' });
+    } else {
+      axios
+        .post(`${process.env.API_URL}/users/signup`, {
+          first_name: firstName,
+          last_name: lastName,
+          username,
+          email,
+          password,
+        })
+        .then(() => {
+          history.push('/');
+        })
+        .catch((error) => {
+          this.setState({ errorMessage: error.response.data.message });
+        });
+    }
   };
 
   render() {
-    const { firstName, lastName, username, email, password, errorMessage } = this.state;
+    const {
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+      confirmPassword,
+      errorMessage,
+    } = this.state;
     return (
       <Fragment>
-        <div className="background">
-          <h1>Top 100 Movies List</h1>
+        <main className="main-logged-out">
+          <h1 className="title">Top 100 Movies List</h1>
           <form onSubmit={this.handleSubmit}>
             <div className="form">
-              <h2 className="cta-box">Sign up to start now</h2>
+              <h2 className="secondary-title">Sign up to start now</h2>
               <input
                 className="input-field"
                 name="firstName"
@@ -93,6 +104,14 @@ class Signup extends React.Component {
                 onChange={this.handleChange}
                 placeholder="Password"
               />
+              <input
+                className="input-field password"
+                name="confirmPassword"
+                value={confirmPassword}
+                type="password"
+                onChange={this.handleChange}
+                placeholder="Confirm Password"
+              />
               <button type="submit" className="submit-button button">
                 Sign Up
               </button>
@@ -103,7 +122,7 @@ class Signup extends React.Component {
               {errorMessage && <span>{errorMessage}</span>}
             </div>
           </form>
-        </div>
+        </main>
       </Fragment>
     );
   }
