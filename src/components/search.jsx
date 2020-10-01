@@ -12,11 +12,21 @@ const MovieCard = loadable(() => import('./movie-card'));
 class Search extends React.Component {
   constructor(props) {
     super(props);
+    const { location } = props;
+    const searchParams = new URLSearchParams(location.search);
     this.state = {
-      search: '',
+      search: searchParams.has('query') ? searchParams.get('query') : '',
       movies: [],
       errorMessage: '',
     };
+  }
+
+  componentDidMount() {
+    const { location } = this.props;
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.has('query')) {
+      this.handleSearch();
+    }
   }
 
   handleChange = (event) => {
@@ -27,8 +37,13 @@ class Search extends React.Component {
 
   handleSearch = () => {
     const { search } = this.state;
+    const { history } = this.props;
     const token = TokenManager.getToken();
     const searchEnc = encodeURI(search);
+
+    history.push({
+      search: `query=${searchEnc}`,
+    });
     axios
       .get(`${process.env.API_URL}/movies/search?query=${searchEnc}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -127,6 +142,10 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+    search: PropTypes.string,
+  }).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
